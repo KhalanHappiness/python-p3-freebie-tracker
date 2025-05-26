@@ -24,6 +24,12 @@ class Freebie(Base):
 
     def __repr__(self):
         return f'<Freebie {self.item_name} (${self.value})>'
+    
+    def print_details(self):
+        #checks if dev and company exist
+        dev_name = self.dev.name if self.dev else "unknown Dev"
+        company_name = self.company.name if self.company else "Unknown Company"
+        return f"{dev_name} owns a {self.name} from {company_name}."
 
 class Company(Base):
     __tablename__ = 'companies'
@@ -47,5 +53,4 @@ class Dev(Base):
      
     def __repr__(self):
         return f'<Dev {self.name}>'
-    
     
