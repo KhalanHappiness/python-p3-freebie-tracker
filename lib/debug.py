@@ -107,7 +107,7 @@ if __name__ == '__main__':
         print(f"Samuel's freebies BEFORE new: {[f.item_name for f in samuel.freebies]}")
         new_freebie_cap = google.give_freebie(samuel, "Google Cap", 25)
         session.add(new_freebie_cap)
-        session.commit() # Commit the new freebie to the database
+        session.commit() 
         session.refresh(samuel) # Refresh samuel to see the newly added freebie
         print(f"Samuel's freebies AFTER new: {[f.item_name for f in samuel.freebies]}")
         print(f"New freebie details: {new_freebie_cap.print_details()}")
@@ -157,6 +157,5 @@ if __name__ == '__main__':
     print("-" * 30)
     print("\n--- Debug Session Complete ---")
 
-    # This line will open an interactive debugger, allowing you to inspect objects
-    # Type 'c' to continue or 'q' to quit
+    
     import ipdb; ipdb.set_trace()
