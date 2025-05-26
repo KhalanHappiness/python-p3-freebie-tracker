@@ -62,3 +62,24 @@ class Dev(Base):
     def __repr__(self):
         return f'<Dev {self.name}>'
     
+    def received_one(self, item_name):
+        # Iterate through each freebie associated with this dev
+        for freebie in self.freebies:
+            # If the current freebie's name matches the item_name, return True
+            if freebie.name == item_name:
+                return True
+        # If the loop finishes without finding a match, return False
+        return False
+    
+
+    def give_away(self, target_dev, freebie_to_give):
+        # Check if the freebie_to_give actually belongs to the current dev
+        if freebie_to_give in self.freebies:
+            
+            freebie_to_give.dev = target_dev
+            
+            print(f"{self.name} successfully gave away '{freebie_to_give.name}' to {target_dev.name}.")
+            return True
+        else:
+            print(f"{self.name} cannot give away '{freebie_to_give.name}' because it does not belong to them.")
+            return False
