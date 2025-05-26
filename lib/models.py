@@ -8,26 +8,6 @@ convention = {
 metadata = MetaData(naming_convention=convention)
 
 Base = declarative_base(metadata=metadata)
-
-class Company(Base):
-    __tablename__ = 'companies'
-
-    id = Column(Integer(), primary_key=True)
-    name = Column(String())
-    founding_year = Column(Integer())
-
-    def __repr__(self):
-        return f'<Company {self.name}>'
-
-class Dev(Base):
-    __tablename__ = 'devs'
-
-    id = Column(Integer(), primary_key=True)
-    name= Column(String())
-
-    def __repr__(self):
-        return f'<Dev {self.name}>'
-    
 class Freebie(Base):
     __tablename__ = 'freebies'
 
@@ -37,5 +17,35 @@ class Freebie(Base):
     dev_id = Column(Integer(), ForeignKey('devs.id'))
     company_id = Column(Integer(), ForeignKey('companies.id'))
 
+    # Freebie.dev returns the Dev instance for this Freebie.
+    dev = relationship("Dev", backref="freebies")
+    # Freebie.company returns the Company instance for this Freebie.
+    company = relationship("Company", backref="freebies")
+
     def __repr__(self):
         return f'<Freebie {self.item_name} (${self.value})>'
+
+class Company(Base):
+    __tablename__ = 'companies'
+
+    id = Column(Integer(), primary_key=True)
+    name = Column(String())
+    founding_year = Column(Integer()) 
+
+
+    def __repr__(self):
+        return f'<Company {self.name}>'
+    
+        
+
+class Dev(Base):
+    __tablename__ = 'devs'
+
+    id = Column(Integer(), primary_key=True)
+    name= Column(String())
+
+     
+    def __repr__(self):
+        return f'<Dev {self.name}>'
+    
+    
